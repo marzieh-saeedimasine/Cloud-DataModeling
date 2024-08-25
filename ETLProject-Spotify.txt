@@ -1,0 +1,53 @@
+-- Spotify Dataset 2023 was taken from kaggle:
+ https://www.kaggle.com/datasets/tonygordonjr/spotify-dataset-2023
+
+--Create IAM user and access to different sources
+Iam user, I want to create an IAM user, Custom password, Attach policies directly: 
+AmazonS3FullAccess
+AWSGlueConsoleFullAccess
+AmazonAthenaFullAccess
+AWSQuicksightAthenaAccess
+AWSQuickSightDescribeRDS
+
+IAM user detail:
+https://#########.signin.aws.amazon.com/console
+#########
+Spotify-project
+##########
+
+
+--Create S3 bucket and store the data:
+Amazon S3,Create bucket, Bucket name, upload files
+
+--Create data pipeline with AWS glue:
+AWS Glue,Visual ETL
+Visual: 
+source: Amazon S3: Name, Browse S3, Data format
+Transforms: Join, drop dupplicate, drop fields, 
+Targets: AmaAmazon S3: Name, S3 Target Location 
+Save, job detail, iam role for glue, 
+run the job
+AWS Glue, Job run monitoring, run status:Succeeded
+check S3 Target Location to see transform data
+
+--Create catalog and database with crawler:
+AWS Glue, Crawlers, create Crawlers, add data source, S3 path, create database, Crawler schedule (on demand),create Crawlers,run Crawlers
+check Data Catalog, Databases, Tables, 
+check Tables, check Schema 
+
+--Create AWS Thena and setup Query editor to make Query
+Amazon Athena, Query editor tabs, Data source, Database, 
+Before you run your first query, you need to set up a query result location in Amazon S3. Query result location, create a S3 bucket for query-output
+run the Query
+
+--Create Quicksight to create visualization
+create account for the first time user
+datasets, new dataset, Athena, New Athena data source, Data source name, ...
+
+--Download S3 bucket in your local
+aws configure
+AWS Access Key ID: #######
+AWS Secret Access Key : ######
+Default region name : eu-central-1
+Default output format: 
+aws s3 sync s3://Spotify-project .
