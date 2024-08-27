@@ -1,0 +1,47 @@
+ETL data analysis of time series data using AWS:
+
+-- Dataset of superstore was taken from kaggle:
+https://www.kaggle.com/datasets/vivek468/superstore-dataset-final
+
+
+--Create S3 bucket and store the partitioned data in different folder: 
+Amazon S3,Create bucket, Bucket name, create directory with this format:
+day=1-1-2017, day=4-1-2017 for daily data and upload data one by one
+
+Subproject-1:
+--Create crawler for partitioned data: 
+Note: when you want to start making with glu, check your region!!!! and create new role for Glue, Power use acess policy!!!
+AWS Glue, Crawlers, create Crawlers, add data source, S3 path, Subsequent crawler runs: Crawl new sub-folders only
+create database,create IAM role (glue, Power use acess), Crawler schedule (on demand),create Crawlers,run Crawlers
+check Data Catalog, Databases, Tables, 
+check Tables, check Schema for column names, check partition for each partition of data. in this case "day" is added as column for partitioning
+
+--Create AWS Thena and setup Query editor for partitioned data
+Amazon Athena, Query editor tabs, Data source, Database, 
+Before you run your first query, you need to set up a query result location in Amazon S3. Query result location, create a S3 bucket for query-output
+run the Query:
+SELECT * FROM "marzieh-data"."marziehdata"; in this case load all the data
+SELECT * FROM "marzieh-data"."marziehdata" where day= '2017-01-04' ;  load data for just partitioned data
+
+add Another day to S3 bucket, and run the existing crawler again, it will run for new sub directory and bring new table. In this case we dont need to create crawler each time.
+
+
+Subproject-2:
+--Create data pipeline with AWS glue to convert csv or  existing database to Another format like json format:
+AWS Glue,Visual ETL
+source: Amazon S3: Name, Browse S3, Data format
+Transforms: Transform, change schema, drop rows that you dont need
+Targets: AmaAmazon S3: Name, Format, S3 Target Location 
+job detail: iam role for glue (glue, Power use acess), Advanced properties: Script path, Temporary path 
+Save,
+run the job
+AWS Glue, Job run monitoring, run status: Succeeded
+check S3 Target Location to see transformed data
+you can make crawler and query of it in Athena
+
+--AWS Glue, Triggers: A trigger schedule to initiate an ETL job.
+Add triger, Name, Trigger type: Schedule, Frequency:Daily, Start time
+Choose jobs or crawlers to activate, add job
+Triggers, select the job, action: activate or deactivate the job
+
+Add triger, Name, Trigger type:Job or crawler event, you can set a job to be activated when the first job is finished

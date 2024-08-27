@@ -4,7 +4,7 @@ This repository provides End to End projects for data analysis and machine learn
 
 
 ## Overview of ETL data pipeline with Amazon Web Services (AWS):  
-**ETL data pipeline of spotify dataset**    
+**ETL pipeline of spotify dataset**    
 -- Dataset was taken from kaggle:  
  https://www.kaggle.com/datasets/tonygordonjr/spotify-dataset-2023  
 -- Create IAM user and access to different sources  
@@ -25,3 +25,14 @@ https://www.kaggle.com/datasets/henriqueyamahata/bank-marketing
 --Xgboost image model was created and model training was performed with help of sagemaker.estimator.  
 -- model deployed and used for prediction of test data set.   
 -- notebook is available (AWS-ML-MarketingProject.ipynb)    
+
+
+## Overview of ETL pipeline for time series data analysis using AWS:        
+**ETL pipeline of time series dataset**        
+-- Dataset of superstore was taken from kaggle:     
+https://www.kaggle.com/datasets/vivek468/superstore-dataset-final     
+-- Create S3 bucket and store partitioned daily data     
+-- Create crawler for partitioned data    
+-- Create data pipeline to convert csv or existing database to Another format like json format with help of AWS Glue,Visual ETL.      
+-- AWS Triggers to schedule initiating an ETL job.     
+-- detailed information about each step as described in ETL-TimeseriesProject.txt file      
