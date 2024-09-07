@@ -36,3 +36,13 @@ https://www.kaggle.com/datasets/vivek468/superstore-dataset-final
 -- Create data pipeline to convert csv or existing database to Another format like json format with help of AWS Glue,Visual ETL.      
 -- AWS Triggers to schedule initiating an ETL job.     
 -- detailed information about each step as described in ETL-TimeseriesProject.txt file      
+
+
+## Overview of PySpark DataFrame and Glue DynamicFrame for data analysis using AWS:    
+**Data Frame of customer dataset**       
+-- Dataset was taken from this link:   
+https://github.com/johnny-chivers/sql-for-athena/tree/main/data     
+-- Upload SparkDataFrame-Project.ipynb Notebook to AWS Glue notebook  
+-- Create GlueContext and spark_session    
+-- Use GLUE SQL to manipulate the data    
+-- Work with Spark Data Frame and Glue Dynamic Frame    
